@@ -10,4 +10,14 @@ public class Element {
         this.target = target;
         this.effectivity = effectivity;
     }
+
+    public ElementType getSource() {
+        return this.source;
+    }
+    public ElementType getTarget() {
+        return this.target;
+    }
+    public double getEffectivity() {
+        return  this.effectivity;
+    }
 }
