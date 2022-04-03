@@ -6,11 +6,11 @@ public class Stats {
     private double specialDefense;
     private double speed;
 
-    private integer attackBuff;
-    private integer defenseBuff;
-    private integer specialAttackBuff;
-    private integer specialDefenseBuff;
-    private integer speedBuff;
+    private int attackBuff;
+    private int defenseBuff;
+    private int specialAttackBuff;
+    private int specialDefenseBuff;
+    private int speedBuff;
 
     public Stats(double hp, double atk, double def, double spAtk, double spDef, double spe){
         this.healthPoint = hp;
@@ -21,27 +21,29 @@ public class Stats {
         this.speed = spe;
     }
 
-    public getHP(){
+    public double getHP(){
         return this.healthPoint;
     }
     
-    public getAtk(){
+    public double getAtk(){
         return this.attack;
     }
-    public getDef(){
+    public double getDef(){
         return this.defense;
     }
-    public getSpAtk(){
+    public double getSpAtk(){
         return this.specialAttack;
     }
-    public getSpDef(){
+    public double getSpDef(){
         return this.specialDefense;
     }
-    public getSpd(){
+    public double getSpd(){
         return this.speed;
     }
 
-    public void atkBuff(){ 
+    //ntar input base statsnya biar abis dibuff/debuff hasilnya tetap
+    //nanti kalo udah pelajarin csv reader gua masukin stats 
+    public void atkBuff(double attack, int attackBuff){ 
         if(attackBuff == -4){
             this.attack = attack * 2/6;
         }
@@ -70,7 +72,7 @@ public class Stats {
             this.attack = attack * 6/2;
         }
     }
-    public void defBuff(){ 
+    public void defBuff(double defense, int defenseBuff){ 
         if(defenseBuff == -4){
             this.defense = defense * 2/6;
         }
@@ -99,7 +101,7 @@ public class Stats {
             this.defense = defense * 6/2;
         }
     }
-    public void spAtkBuff(){ 
+    public void spAtkBuff(double specialAttack, int specialAttackBuff){ 
         if(specialAttackBuff == -4){
             this.specialAttack = specialAttack * 2/6;
         }
@@ -128,7 +130,7 @@ public class Stats {
             this.specialAttack = specialAttack * 6/2;
         }
     }
-    public void spDefBuff(){ 
+    public void spDefBuff(double specialDefense, int specialDefenseBuff){ 
         if(specialDefenseBuff == -4){
             this.specialDefense = specialDefense * 2/6;
         }
@@ -157,7 +159,7 @@ public class Stats {
             this.specialDefense = specialDefense * 6/2;
         }
     }
-    public void speedBuff(){ 
+    public void speedBuff(double speed, int speedBuff){ 
         if(speedBuff == -4){
             this.speed = speed * 2/6;
         }
@@ -189,7 +191,7 @@ public class Stats {
 
     public void printStats(){
         System.out.println("Stats : ");
-        System.out.println("HP : " + this.health);
+        System.out.println("HP : " + this.healthPoint);
         System.out.println("Attack : " + this.attack);
         System.out.println("Defense : " + this.defense);
         System.out.println("Special Attack : " + this.specialAttack);
