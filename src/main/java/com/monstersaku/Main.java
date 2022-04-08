@@ -7,8 +7,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Random;
 
 public class Main {
+    public int[] monsters;
+
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
             "configs/movepool.csv",
@@ -28,11 +32,115 @@ public class Main {
                     }
                     System.out.println();
                 }
-                System.out.println("=========== CONTENT END ===========");
-                System.out.println();
-            } catch (Exception e) {
+                System.out.println("=========== CONTENT END ===========\n");
+
+            } 
+            catch (Exception e) {
                 // do nothing
             }
+        
+        }
+        boolean menu = true;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("=================================================");
+        System.out.println("========= SELAMAT DATANG DI GAME PIKMIN =========");
+        System.out.println("================== EH POKEMAN ===================");
+        System.out.println("=================================================");
+        System.out.println("");
+
+        while (menu){
+        System.out.println("Keterangan :");
+        System.out.println("1. Mulai bermain");
+        System.out.println("2. Tutorial");
+        System.out.println("3. Exit\n");
+        System.out.println("Silahkan masukkan command : ");
+        int command = sc.nextInt();
+
+        if(command == 1){
+            //masukkin fungsi buat start game
+            // startGame();
+        }
+
+        else if(command == 2){
+            printHelp();
+        }
+
+        else if(command == 3){
+            System.out.println("\nTerima kasih sudah bermain game pokeman dari kami");
+            System.out.println("Credits : Kelompok 23 IF2212 - Object Oriented Programming");
+            System.out.println("18220004 David Hugo Triannas");
+            System.out.println("18220024 Aulia Fajriaturrakhmah");
+            System.out.println("18220050 Alya Apriliyanti");
+            System.out.println("18220072 Muhammad Ammar Murtaqib");
+            System.exit(0);
+            
+            sc.close();
+        }
         }
     }
+
+    public static void printHelp(){
+        System.out.println("========================================================================================");
+        System.out.println("Game pokeman ini dibuat untuk pemenuhan tugas besar IF2212 - Object Oriented Programming");
+        System.out.println("Game ini adalah turn-based fighting game yang wajib dimainkan 2 orang ");
+        System.out.println("Cara bermain game ini adalah dengan mengisi 1 saat permintaan command");
+        System.out.println("Kedua pemain akan mendapatkan 6 pokeman yang dapat digunakan untuk fighting");
+        System.out.println("Dalam game, pemain dapat memilih antara FIGHT dan POKEMAN");
+        System.out.println("FIGHT akan memungkinkan pemain untuk memilih move yang akan dipakai untuk menyerang");
+        System.out.println("POKEMAN akan memungkinkan pemain untuk mengganti pokeman yang sedang aktif di lapangan");
+        System.out.println("Game akan selesai jika salah satu pemain sudah tidak memiliki pokeman");
+        System.out.println("Maka pemain yang masih memiliki pokeman akan dijadikan pemenang dari pertarungan");
+        System.out.println("========================================================================================");
+    }
+
+    // public static void startGame(){
+    //     System.out.println("Pemain 1 mendapatkan pokeman :")
+    //     for(int i = 0; i < 6; i++){
+    //         // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters1, 2 monsters2
+    //         // int rnd1 = new Random().nextInt(monsters.length);
+    //         // int rnd2 = new Random().nextInt(monsters.length);
+    //         // if (checkin(monsters1, monsters[rnd1]){
+    //         //     monsters1 += monsters[new Random().nextInt(monsters.length)];
+    //         // }
+    //         // else{
+    //         //     monsters1 += monsters[rnd1];
+    //         // }
+    //         // if (checkin(monsters2, monsters[rnd2]){
+    //         //     monsters2 += monsters[new Random().nextInt(monsters.length)];
+    //         // }
+    //         // else{
+    //         //     monsters2 += monsters[rnd1];
+    //         // }
+    //     }
+    //     System.out.println("Pemain 1 mendapatkan pokeman :\n");
+    //     for (monster monster : monsters1){
+    //         System.out.println("Ini masukkin detail monster : ID, nama, elementtypes, stats, moves");
+    //     }
+    //     System.out.println("Pemain 2 mendapatkan pokeman :\n");
+    //     for (monster monster : monsters2){
+    //         System.out.println("Ini masukkin detail monster : ID, nama, elementtypes, stats, moves");
+    //     }
+    // }
+
+    // public static int callrand(){
+    //     int rnd1 = new Random().nextInt(monsters.length);
+    //     int rnd2 = new Random().nextInt(monsters.length);
+    //     return rnd1;
+    //     return rnd2;
+    // }
+
+    // private static boolean checkin(int[] arr, int toCheckValue)
+    // {
+    //     // check if the specified element
+    //     // is present in the array or not
+    //     // using Linear Search method
+    //     boolean test = false;
+    //     for (int element : arr) {
+    //         if (element == toCheckValue) {
+    //             test = true;
+    //             break;
+    //         }
+    //     }
+    //     return test;
+    // }
 }
