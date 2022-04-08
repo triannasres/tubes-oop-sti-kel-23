@@ -1,6 +1,6 @@
 package com.monstersaku.srcMove;
 import com.monstersaku.elementMonster.ElementType;
-import com.monstersaku.Stats;
+import com.monstersaku.Monster;
 
 public class NormalMove extends Move {
     private final int basePower;
@@ -10,7 +10,7 @@ public class NormalMove extends Move {
     }
     public void NormalAttacl(Monster movedMons, Monster target){
         if(getAmmunition()!=0){
-            double damage = (double)Math.floor((basePower*(movedMons.getStats().getAttack()/(target.getStats().getDefense())+2)));
+            double damage = (double)Math.floor((basePower*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
             target.getStats().setHP(target.getStats().getHP()-damage);
         }else{
             // ammunition = 0

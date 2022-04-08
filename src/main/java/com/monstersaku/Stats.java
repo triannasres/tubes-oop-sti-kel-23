@@ -1,4 +1,6 @@
-public class Stats {
+package com.monstersaku;
+
+public class Stats implements StatsBuff{
     private double healthPoint;
     private double attack;
     private double defense;
@@ -19,6 +21,26 @@ public class Stats {
         this.specialAttack = spAtk;
         this.specialDefense = spDef;
         this.speed = spe;
+    }
+
+    public void setHP(double healthPoint){
+        this.healthPoint = healthPoint;
+    }
+    
+    public void setAtk(double attack){
+        this.attack = attack;
+    }
+    public void setDef(double defense){
+        this.defense = defense;
+    }
+    public void setSpAtk(double specialAttack){
+        this.specialAttack = specialAttack;
+    }
+    public void setSpDef(double specialDefense){
+        this.specialDefense = specialDefense;
+    }
+    public void setSpd(double speed){
+        this.speed = speed;
     }
 
     public double getHP(){

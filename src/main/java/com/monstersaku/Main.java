@@ -32,7 +32,7 @@ public class Main {
                     }
                     System.out.println();
                 }
-                System.out.println("=========== CONTENT END ===========\n");
+                System.out.println("=========== CONTENT END =============\n");
 
             } 
             catch (Exception e) {

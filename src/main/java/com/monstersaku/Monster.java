@@ -1,15 +1,13 @@
-//import ElementType
-//import Stats
-//import Move
-//import EffectType
-//import MonsterState
+package com.monstersaku;
+import com.monstersaku.elementMonster.*;
+import com.monstersaku.srcMove.*;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Monster {
     //attribute
+    private final int id;
     private final String nama;
     private List<ElementType> elementTypes;
     private Stats baseStats;
@@ -19,13 +17,19 @@ public class Monster {
     private int sleepingTime = 0;
 
     //constructor
-    public Monster(String nama, Stats baseStats, List<ElementType> elementTypes, List<Move> moves) {
+    public Monster(int id, String nama, Stats baseStats, List<ElementType> elementTypes, List<Move> moves) {
+        this.id = id;
         this.nama = nama;
         this.baseStats = baseStats;
         this.elementTypes = elementTypes;
         this.moves = moves;
     }   
 
+    //get id of monster
+    public int getID(){
+        return this.id;
+    }
+    
     //get name of monster
     public String getName() {
         return this.nama;
@@ -65,7 +69,7 @@ public class Monster {
     }
 
     /** Condition of Monster **/
-    public EffectType setAffectedBy(EffectType effect) {
+    public void setAffectedBy(EffectType effect) {
         this.condition = effect;
         if (effect == EffectType.SLEEP) {
             Random r = new Random();
@@ -98,5 +102,9 @@ public class Monster {
         this.getStats().printStats();
         this.printMonsterMoves();
     }
+
+    
+
+    
 }
 

@@ -1,6 +1,7 @@
 package com.monstersaku.srcMove;
-import com.monstersaku.elementMonster.ElementType;
+import com.monstersaku.elementMonster.*;
 import com.monstersaku.Stats;
+import com.monstersaku.Monster;
 
 public class StatsMove extends Move{
     private final EffectType effectType;
@@ -18,10 +19,10 @@ public class StatsMove extends Move{
         return stats;
     }
     public void BurnEffect(Monster target){
-        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getMaxHP()*0.125));
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.125));
     }
     public void PoisonEffect(Monster target){
-        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getMaxHP()*0.0625));
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.0625));
     }
     public int SleepEffect(){
         int sleepTurn = (int)(Math.random()*6)+1; 
@@ -32,8 +33,8 @@ public class StatsMove extends Move{
         // belum chance kena sleep
     }
     public void StatsEffect(Monster target){
-        target.setEffect(effectType);
-        target.getStats().setHP(target.getStats().getHP()+((stats.getHP()/100)*target.getStats().getMaxHP()));
+        target.setAffectedBy(effectType);
+        target.getStats().setHP(target.getStats().getHP()+((stats.getHP()/100)*target.getStats().getHP()));
         target.getStats().setAtk(target.getStats().getAtk()+((stats.getAtk())));
         target.getStats().setDef(target.getStats().getDef()+((stats.getDef())));
         target.getStats().setSpAtk(target.getStats().getSpAtk()+((stats.getSpAtk())));
