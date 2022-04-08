@@ -1,4 +1,4 @@
-package com.monstersaku.util;
+package com.monstersaku.srcMove;
 
 public enum EffectType {
     NONE,
