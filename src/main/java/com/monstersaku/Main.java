@@ -1,6 +1,6 @@
 package com.monstersaku;
 
-import com.monstersaku.util.CSVReader;
+import com.monstersaku.util.*;
 
 import java.io.File;
 import java.util.Arrays;
@@ -11,7 +11,6 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
-    public int[] monsters;
 
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
             "configs/monsterpool.csv",
@@ -58,7 +57,7 @@ public class Main {
 
         if(command == 1){
             //masukkin fungsi buat start game
-            // startGame();
+            startGame();
         }
 
         else if(command == 2){
@@ -93,54 +92,52 @@ public class Main {
         System.out.println("========================================================================================");
     }
 
-    // public static void startGame(){
-    //     System.out.println("Pemain 1 mendapatkan pokeman :")
-    //     for(int i = 0; i < 6; i++){
-    //         // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters1, 2 monsters2
-    //         // int rnd1 = new Random().nextInt(monsters.length);
-    //         // int rnd2 = new Random().nextInt(monsters.length);
-    //         // if (checkin(monsters1, monsters[rnd1]){
-    //         //     monsters1 += monsters[new Random().nextInt(monsters.length)];
-    //         // }
-    //         // else{
-    //         //     monsters1 += monsters[rnd1];
-    //         // }
-    //         // if (checkin(monsters2, monsters[rnd2]){
-    //         //     monsters2 += monsters[new Random().nextInt(monsters.length)];
-    //         // }
-    //         // else{
-    //         //     monsters2 += monsters[rnd1];
-    //         // }
-    //     }
-    //     System.out.println("Pemain 1 mendapatkan pokeman :\n");
-    //     for (monster monster : monsters1){
-    //         System.out.println("Ini masukkin detail monster : ID, nama, elementtypes, stats, moves");
-    //     }
-    //     System.out.println("Pemain 2 mendapatkan pokeman :\n");
-    //     for (monster monster : monsters2){
-    //         System.out.println("Ini masukkin detail monster : ID, nama, elementtypes, stats, moves");
-    //     }
-    // }
+    public static void startGame(){
+        Monster[] monsters = new Monster[20]; 
+        Monster[] monsters1 = new Monster[6]; 
+        Monster[] monsters2= new Monster[6]; 
+        System.out.println("Pemain 1 mendapatkan pokeman :");
+        for(int i = 0; i < 6; i++){
+            // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters1, 2 monsters2
+            int rnd1 = new Random().nextInt(monsters.length);
+            int rnd2 = new Random().nextInt(monsters.length);
+            if (checkin(monsters1, monsters[rnd1])){
+                monsters1[i] = monsters[new Random().nextInt(monsters.length)];
+            }
+            else{
+                monsters1[i] = monsters[rnd1];
+            }
+            if (checkin(monsters2, monsters[rnd2])){
+                monsters2[i] = monsters[new Random().nextInt(monsters.length)];
+            }
+            else{
+                monsters2[i] = monsters[rnd1];
+            }
+        }
+        System.out.println("Pemain 1 mendapatkan pokeman :\n");
+        System.out.println("Nama, elementtypes, stats, moves");
+        for(int i = 0; i < 6; i++){
+            monsters1[i].printInfoMonster();
+        }
+        System.out.println("Pemain 2 mendapatkan pokeman :\n");
+        System.out.println("Nama, elementtypes, stats, moves");
+        for(int i = 0; i < 6; i++){
+            monsters2[i].printInfoMonster();
+        }
+    }
 
-    // public static int callrand(){
-    //     int rnd1 = new Random().nextInt(monsters.length);
-    //     int rnd2 = new Random().nextInt(monsters.length);
-    //     return rnd1;
-    //     return rnd2;
-    // }
-
-    // private static boolean checkin(int[] arr, int toCheckValue)
-    // {
-    //     // check if the specified element
-    //     // is present in the array or not
-    //     // using Linear Search method
-    //     boolean test = false;
-    //     for (int element : arr) {
-    //         if (element == toCheckValue) {
-    //             test = true;
-    //             break;
-    //         }
-    //     }
-    //     return test;
-    // }
+    private static boolean checkin(Monster[] arr, Monster toCheckValue)
+    {
+        // check if the specified element
+        // is present in the array or not
+        // using Linear Search method
+        boolean test = false;
+        for (Monster element : arr) {
+            if (element == toCheckValue) {
+                test = true;
+                break;
+            }
+        }
+        return test;
+    }
 }

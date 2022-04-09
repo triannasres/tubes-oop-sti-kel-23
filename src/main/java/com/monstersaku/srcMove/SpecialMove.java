@@ -1,5 +1,5 @@
 package com.monstersaku.srcMove;
-import com.monstersaku.elementMonster.ElementType;
+import com.monstersaku.elementMonster.*;
 import com.monstersaku.Monster;
 
 public class SpecialMove extends Move {
