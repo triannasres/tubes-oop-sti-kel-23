@@ -97,6 +97,13 @@ public class Monster {
             this.moves.get(i).printMove();
         }
     }
+    public void printMonsterNamaMoves() {
+        System.out.println("List of Move:");
+        for(int i = 0; i < this.getMoves().size(); i++){
+            String namaMove = this.moves.get(i).getName();
+            System.out.println(i+1 +". "+ namaMove);
+        }
+    }
 
     /** Condition of Monster **/
     public void setAffectedBy(EffectType effect) {
