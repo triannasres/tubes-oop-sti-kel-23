@@ -11,8 +11,11 @@ public class Move {
     private final int priority;
     private int ammunition;
     private final MoveTarget target;
+    // private final int effect;
+    // private final Stats statsEffect;
 
-    public Move(int id, MoveType moveType, String name, ElementType elementType, int accuracy, int priority, int ammunition, MoveTarget target) {
+    public Move(int id, MoveType moveType, String name, ElementType elementType, int accuracy, int priority, int ammunition, MoveTarget target){ 
+    // int effect, Stats statsEffect) {
         this.id = id;
         this.moveType = moveType;
         this.name = name;
@@ -21,6 +24,8 @@ public class Move {
         this.priority = priority;
         this.ammunition=ammunition;
         this.target = target;
+        // this.effect = effect;
+        // this.statsEffect = statsEffect;
     }
 
     // Setters
@@ -54,6 +59,12 @@ public class Move {
     public MoveTarget getTarget() {
         return target;
     }
+    // public int getEffect() {
+    //     return effect;
+    // }
+    // public Stats getStatsEffect() {
+    //     return statsEffect;
+    // }
 
 
     public void printMove(){
@@ -66,5 +77,27 @@ public class Move {
         System.out.println("Priority : "+ getPriority()); 
         System.out.println("Ammunition : "+ getAmmunition());
         System.out.println("Target : "+ getTarget());
+        // System.out.println("Effect : "+ getEffect());
+        // System.out.println("Stats Effect : "+ getStatsEffect());
     }
+    
+    public static MoveType toMoveType(String str){
+        switch (str){
+            case "NORMAL" : return MoveType.NORMAL;
+            case "SPECIAL" : return MoveType.SPECIAL;
+            case "STATUS" : return MoveType.STATUS;
+            default : return MoveType.NORMAL;
+        }
+    }
+
+    public static MoveTarget toMoveTarget(String str){
+        switch (str){
+            case "OWN" : return MoveTarget.OWN;
+            case "ENEMY" : return MoveTarget.ENEMY;
+            default : return MoveTarget.ENEMY;
+            }
+
+        }
 }
+
+

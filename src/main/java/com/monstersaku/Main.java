@@ -1,7 +1,12 @@
 package com.monstersaku;
 
+import com.monstersaku.database.*;
+import com.monstersaku.srcMove.*;
+import com.monstersaku.elementMonster.*;
 import com.monstersaku.util.*;
+import com.monstersaku.database.MoveDb;
 
+import java.lang.Enum;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,34 +16,28 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Main {
-
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
-            "configs/monsterpool.csv",
             "configs/movepool.csv",
-            "configs/element-type-effectivity-chart.csv"));
+            "configs/element-type-effectivity-chart.csv",
+            "configs/monsterpool.csv"));
 
     public static void main(String[] args) {
+        List<CSVReader> reader = new ArrayList<CSVReader>();
         for (String fileName : CSV_FILE_PATHS) {
             try {
-                System.out.printf("Filename: %s\n", fileName);
-                CSVReader reader = new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";");
-                reader.setSkipHeader(true);
-                List<String[]> lines = reader.read();
-                System.out.println("=========== CONTENT START ===========");
-                for (String[] line : lines) {
-                    for (String word : line) {
-                        System.out.printf("%s ", word);
-                    }
-                    System.out.println();
-                }
-                System.out.println("=========== CONTENT END =============\n");
-
+                reader.add(new CSVReader(new File(Main.class.getResource(fileName).toURI()), ";"));
             } 
             catch (Exception e) {
                 // do nothing
             }
-        
         }
+        MoveDb.setReader(reader.get(0));
+        ElementDb.setReader(reader.get(1));
+        MonsterDb.setReader(reader.get(2));
+        
+        MoveDb listMoves = new MoveDb();
+        ElementDb listElements = new ElementDb();
+        MonsterDb listMonsters = new MonsterDb(listMoves);
         boolean menu = true;
         Scanner sc = new Scanner(System.in);
         System.out.println("=================================================");
@@ -58,6 +57,7 @@ public class Main {
         if(command == 1){
             //masukkin fungsi buat start game
             startGame();
+            menu = false;
         }
 
         else if(command == 2){
@@ -78,6 +78,10 @@ public class Main {
         }
     }
 
+    // public Move getMoveByID(int id){
+    //     return this..get(id-1);
+    // }
+
     public static void printHelp(){
         System.out.println("========================================================================================");
         System.out.println("Game pokeman ini dibuat untuk pemenuhan tugas besar IF2212 - Object Oriented Programming");
@@ -93,37 +97,35 @@ public class Main {
     }
 
     public static void startGame(){
-        Monster[] monsters = new Monster[20]; 
         Monster[] monsters1 = new Monster[6]; 
-        Monster[] monsters2= new Monster[6]; 
-        System.out.println("Pemain 1 mendapatkan pokeman :");
+        Monster[] monsters2= new Monster[6];
         for(int i = 0; i < 6; i++){
             // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters1, 2 monsters2
-            int rnd1 = new Random().nextInt(monsters.length);
-            int rnd2 = new Random().nextInt(monsters.length);
-            if (checkin(monsters1, monsters[rnd1])){
-                monsters1[i] = monsters[new Random().nextInt(monsters.length)];
+            int rnd1 = new Random().nextInt(MonsterDb.monsters.size());
+            int rnd2 = new Random().nextInt(MonsterDb.monsters.size());
+            if (checkin(monsters1, MonsterDb.monsters.get(rnd1))){
+                monsters1[i] = MonsterDb.monsters.get(new Random().nextInt(MonsterDb.monsters.size()));
             }
             else{
-                monsters1[i] = monsters[rnd1];
+                monsters1[i] = MonsterDb.monsters.get(rnd1);
             }
-            if (checkin(monsters2, monsters[rnd2])){
-                monsters2[i] = monsters[new Random().nextInt(monsters.length)];
+            if (checkin(monsters2, MonsterDb.monsters.get(rnd2))){
+                monsters2[i] = MonsterDb.monsters.get(new Random().nextInt(MonsterDb.monsters.size()));
             }
             else{
-                monsters2[i] = monsters[rnd1];
+                monsters2[i] = MonsterDb.monsters.get(rnd2);
             }
         }
-        System.out.println("Pemain 1 mendapatkan pokeman :\n");
-        System.out.println("Nama, elementtypes, stats, moves");
+        System.out.println("\nPemain 1 mendapatkan pokeman :");
         for(int i = 0; i < 6; i++){
-            monsters1[i].printInfoMonster();
+            monsters1[i].printNamaMonster();
         }
-        System.out.println("Pemain 2 mendapatkan pokeman :\n");
-        System.out.println("Nama, elementtypes, stats, moves");
+        System.out.println("\nPemain 2 mendapatkan pokeman :");
         for(int i = 0; i < 6; i++){
-            monsters2[i].printInfoMonster();
+            monsters2[i].printNamaMonster();
         }
+        System.out.println();
+        // monsters2[0].printInfoMonster();
     }
 
     private static boolean checkin(Monster[] arr, Monster toCheckValue)

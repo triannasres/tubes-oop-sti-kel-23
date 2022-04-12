@@ -1,5 +1,6 @@
 package com.monstersaku;
 
+
 public class Stats implements StatsBuff{
     private double healthPoint;
     private double attack;
@@ -21,7 +22,16 @@ public class Stats implements StatsBuff{
         this.specialAttack = spAtk;
         this.specialDefense = spDef;
         this.speed = spe;
+        this.attackBuff = 0;
+        this.defenseBuff = 0;
+        this.specialAttackBuff = 0;
+        this.specialDefenseBuff = 0;
+        this.speedBuff = 0;
     }
+
+    // public Stats(List<Double> statsList) {
+    //     this.statsList = statsList;
+    // }
 
     public void setHP(double healthPoint){
         this.healthPoint = healthPoint;
@@ -209,6 +219,10 @@ public class Stats implements StatsBuff{
         else if (speedBuff == 4){
             this.speed = speed * 6/2;
         }
+    }
+
+    public void decreaseHP(double healthPoint, double damage){
+        this.healthPoint -= damage;
     }
 
     public void printStats(){

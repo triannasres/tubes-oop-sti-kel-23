@@ -17,3 +17,4 @@ id;moveType;name;elementType;accuracy;priority;ammunition;target;effect;statsEff
 16;SPECIAL;Avalanche;ICE;95;1;10;ENEMY;110;0,0,0,0,0,0
 17;SPECIAL;Santet;PSYCHIC;100;1;10;ENEMY;130;0,0,0,0,0,0
 18;SPECIAL;Api Naga;DRAGON;100;1;10;ENEMY;110;0,0,0,0,0,0
+18;NORMAL;SPLASH;NORMAL;100;1;100;OWN;0;0,0,0,0,0,0

@@ -8,7 +8,7 @@ public class NormalMove extends Move {
         super(id, moveType, name, elementType, accuracy, priority, ammunition, target);
         this.basePower = basePower;
     }
-    public void NormalAttacl(Monster movedMons, Monster target){
+    public void NormalAttack(Monster movedMons, Monster target){
         if(getAmmunition()!=0){
             double damage = (double)Math.floor((basePower*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
             target.getStats().setHP(target.getStats().getHP()-damage);

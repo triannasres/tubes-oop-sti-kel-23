@@ -72,6 +72,7 @@ public class CSVReader {
             }
             firstLine = false;
         }
+        // System.out.println(list);
         return list;
     }
 }

@@ -1,27 +1,8 @@
 package com.monstersaku.elementMonster;
 
-public class Element {
-    private final ElementType source;
-    private final ElementType target;
-    private final double effectivity;
-
-    public Element(ElementType source, ElementType target, double effectivity) {
-        this.source = source;
-        this.target = target;
-        this.effectivity = effectivity;
-    }
-
-    public ElementType getSource() {
-        return this.source;
-    }
-    public ElementType getTarget() {
-        return this.target;
-    }
-    public double getEffectivity() {
-        return  this.effectivity;
-    }
-
-    public static ElementType toElement(String str){
+public class ElementConfig {
+    
+    public ElementType toElement(String str){
         switch (str){
             case "GRASS" : return ElementType.GRASS;
             case "FIRE" : return ElementType.FIRE;
@@ -39,7 +20,8 @@ public class Element {
             case "ICE" : return ElementType.ICE;
             case "ELECTRIC" : return ElementType.ELECTRIC;
             case "PSYCHIC" : return ElementType.PSYCHIC;
-            case "DRAGON" : return ElementType.WATER;
+            case "DRAGON" : return ElementType.DRAGON;
+            case "NORMAL" : return ElementType.NORMAL;
             default : return ElementType.NORMAL;
         }
     }

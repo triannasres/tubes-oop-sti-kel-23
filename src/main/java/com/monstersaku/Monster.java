@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class Monster {
     //attribute
-    private final int id;
-    private final String nama;
-    private List<ElementType> elementTypes;
+    private int id;
+    private String nama;
+    private List<ElementType> elementTypes; //Ini generics
     private Stats baseStats;
     private List<Move> moves;
     private EffectType condition = EffectType.NONE;
@@ -24,6 +24,36 @@ public class Monster {
         this.elementTypes = elementTypes;
         this.moves = moves;
     }   
+
+    //Setter
+    public void setID(int id){
+        this.id = id;
+    }
+    
+    //get name of monster
+    public void setName(String nama) {
+        this.nama = nama;
+    }
+
+    /**Stats and Buff of Monster **/
+    //get stats of monster
+    public void setStats(Stats baseStats) {
+        this.baseStats = baseStats;
+    }
+
+    /**Element Types of Monster**/
+    //get list of element type of monster
+    public void setElementTypes(List<ElementType> elementTypes) {
+        this.elementTypes = elementTypes;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
+
+    public Move getMoveByID(int id){
+        return moves.get(id);
+    }
 
     //get id of monster
     public int getID(){
@@ -94,6 +124,10 @@ public class Monster {
     }
     public boolean isAlive() {
         return this.state == MonsterState.ALIVE;
+    }
+
+    public void printNamaMonster() {
+        System.out.println("Monster " + this.getName());
     }
 
     public void printInfoMonster() {
