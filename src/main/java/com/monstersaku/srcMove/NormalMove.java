@@ -9,13 +9,13 @@ public class NormalMove extends Move {
         this.basePower = basePower;
     }
     public void NormalAttack(Monster movedMons, Monster target){
+        double damage = 0;
         if(getAmmunition()!=0){
-            double damage = (double)Math.floor((basePower*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
+            damage = (double)Math.floor((basePower*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
             target.getStats().setHP(target.getStats().getHP()-damage);
         }else{
             // ammunition = 0
             System.out.println("Amunisi telah habis");
         }
-
     }
 }

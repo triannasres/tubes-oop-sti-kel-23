@@ -1,19 +1,15 @@
 package com.monstersaku;
 
 import com.monstersaku.database.*;
-import com.monstersaku.srcMove.*;
-import com.monstersaku.elementMonster.*;
 import com.monstersaku.util.*;
 import com.monstersaku.database.MoveDb;
 
-import java.lang.Enum;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Random;
 
 public class Main {
     private static final List<String> CSV_FILE_PATHS = Collections.unmodifiableList(Arrays.asList(
@@ -57,6 +53,7 @@ public class Main {
             //masukkin fungsi buat start game
             Pokeman gameSession = new Pokeman();
             menu = false;
+            command = 3;
         }
 
         else if(command == 2){

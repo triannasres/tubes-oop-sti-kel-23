@@ -72,6 +72,14 @@ public class Stats implements StatsBuff{
     public double getSpd(){
         return this.speed;
     }
+    
+    public void setStatsBuff(int attackBuff, int defenseBuff, int spAtkBuff, int spDefBuff, int speedBuff){
+        this.attackBuff = attackBuff;
+        this.defenseBuff = defenseBuff;
+        this.specialAttackBuff = spAtkBuff;
+        this.specialDefenseBuff = spDefBuff;
+        this.speedBuff = speedBuff;
+    }
 
     //ntar input base statsnya biar abis dibuff/debuff hasilnya tetap
     //nanti kalo udah pelajarin csv reader gua masukin stats 

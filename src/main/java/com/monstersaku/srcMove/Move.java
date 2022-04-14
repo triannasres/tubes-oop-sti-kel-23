@@ -81,23 +81,6 @@ public class Move {
         // System.out.println("Stats Effect : "+ getStatsEffect());
     }
     
-    public static MoveType toMoveType(String str){
-        switch (str){
-            case "NORMAL" : return MoveType.NORMAL;
-            case "SPECIAL" : return MoveType.SPECIAL;
-            case "STATUS" : return MoveType.STATUS;
-            default : return MoveType.NORMAL;
-        }
-    }
-
-    public static MoveTarget toMoveTarget(String str){
-        switch (str){
-            case "OWN" : return MoveTarget.OWN;
-            case "ENEMY" : return MoveTarget.ENEMY;
-            default : return MoveTarget.ENEMY;
-            }
-
-        }
 }
 
 

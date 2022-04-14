@@ -8,7 +8,7 @@ import com.monstersaku.Stats;
 import com.monstersaku.util.CSVReader;
 
 public class MoveDb {
-    private List<Move> moves;
+    public static List<Move> moves;
     static CSVReader reader;
     
     public static void setReader(CSVReader csvReader){
@@ -69,7 +69,7 @@ public class MoveDb {
                 // }
                 // System.out.println();
 
-                this.moves.add(move);
+                MoveDb.moves.add(move);
             }
         }
         catch (Exception e){
@@ -87,6 +87,28 @@ public class MoveDb {
 
     public Move getMoveByID(int id){
         return moves.get(id);
+    }
+
+    public static MoveType determineMoveType(Move moveChosen){
+        MoveType mType = MoveType.DEFAULT;
+        try{
+            if(MoveType.valueOf("NORMAL") == moveChosen.getMoveType()){
+                mType = MoveType.NORMAL;
+            }
+            else if(MoveType.valueOf("SPECIAL") == moveChosen.getMoveType()){
+                mType = MoveType.SPECIAL;
+                
+            }
+            else if(MoveType.valueOf("STATUS") == moveChosen.getMoveType()){
+                // StatsMove.StatsEffect(defenseMonster);
+                mType = MoveType.STATUS;
+            }
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return mType;
+
     }
 
 }

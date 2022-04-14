@@ -9,8 +9,9 @@ public class SpecialMove extends Move {
         this.basePower = basePower;
     }
     public void SpecialAttack(Monster movedMons, Monster target){
+        double damage = 0;
         if(getAmmunition()!=0){
-            double damage = (double)Math.floor((basePower*(movedMons.getStats().getSpAtk()/(target.getStats().getSpDef())+2))*(0.85+Math.random()*0.15));
+            damage = (double)Math.floor((basePower*(movedMons.getStats().getSpAtk()/(target.getStats().getSpDef())+2))*(0.85+Math.random()*0.15));
             target.getStats().setHP(target.getStats().getHP()-damage);
         }else{
             // ammunition = 0

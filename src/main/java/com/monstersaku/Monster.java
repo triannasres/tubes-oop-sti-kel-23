@@ -129,12 +129,18 @@ public class Monster {
     public MonsterState getMonsterState() {
         return this.state;
     }
+    public void knockOut(Monster monster) {
+        monster.state = MonsterState.DEAD;
+    }
     public boolean isAlive() {
         return this.state == MonsterState.ALIVE;
     }
 
     public void printNamaMonster() {
         System.out.println("Monster " + this.getName());
+    }
+    public void printHPMonster(Monster monster){
+        System.out.println("HP " + monster.getName() + ": " + this.baseStats.getHP());
     }
 
     public void printInfoMonster() {
