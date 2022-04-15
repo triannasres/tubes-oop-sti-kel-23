@@ -12,9 +12,18 @@ public class NormalMove extends Move {
     ElementDb elementDb = new ElementDb();
     public void NormalAttack(Monster movedMons, Move moveChosen, Monster target){
         double damage = 0;
+        boolean burnEffect = movedMons.getAffectedBy().equals(EffectType.BURN);
+        double burnMultiplier;
+        if(burnEffect){
+            burnMultiplier = 0.5;
+        }
+        else{
+            //Gaada effect atogak effectnya yang lain
+            burnMultiplier = 1.0;
+        }
         if(getAmmunition()!=0){
             double effectivity = elementDb.getEffectivity(moveChosen.getElementType(),target.getElementType());
-            damage = (double)Math.floor((basePower*effectivity*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
+            damage = (double)Math.floor((basePower*effectivity*burnMultiplier*(movedMons.getStats().getAtk()/(target.getStats().getDef())+2)));
             target.getStats().setHP(target.getStats().getHP()-damage);
             setAmmunition(getAmmunition()-1);
         }else{

@@ -77,17 +77,30 @@ public class Main {
     // }
 
     public static void printHelp(){
-        System.out.println("========================================================================================");
+        System.out.println("===========================================================================================");
         System.out.println("Game pokeman ini dibuat untuk pemenuhan tugas besar IF2212 - Object Oriented Programming");
         System.out.println("Game ini adalah turn-based fighting game yang wajib dimainkan 2 orang ");
         System.out.println("Cara bermain game ini adalah dengan mengisi 1 saat permintaan command");
         System.out.println("Kedua pemain akan mendapatkan 6 pokeman yang dapat digunakan untuk fighting");
+        System.out.println("Masing-masing pemain akan memilih pokemon yang akan dikeluarkan ke battlefield pertama kali");
         System.out.println("Dalam game, pemain dapat memilih antara FIGHT dan POKEMAN");
         System.out.println("FIGHT akan memungkinkan pemain untuk memilih move yang akan dipakai untuk menyerang");
         System.out.println("POKEMAN akan memungkinkan pemain untuk mengganti pokeman yang sedang aktif di lapangan");
+        System.out.println("Jika memilih FIGHT maka move akan dijalankan setelah kedua input pemain diterima");
+        System.out.println("dan ditentukan siapa yang jalan dahulu berdasarkan movePriority dan pokemanSpeed");
+        System.out.println("Jika setelah melakukan move dan targetPokeman knockout, maka pemain akan harus segera mengganti activePokeman miliknya");
+        System.out.println("dan move yang sebelumnya dipilih tidak akan dieksekusi");
+        System.out.println("Setiap move dan pokeman memiliki Type yang menentukan effectivity dari suat move yang dilakukan");
+        System.out.println("EffectivityType dapat dilihat disini : https://bulbapedia.bulbagarden.net/wiki/Type/Type_chart");
+        System.out.println("Ada beberapa EFFECT yang dapat merugikan pokeman yaitu :");
+        System.out.println("POISON yang akan mengurangi HP pokeman sebanyak 0.0625*HP tiap turn");
+        System.out.println("BURN yang akan mengurangi HP pokeman sebanyak 0.125*HP tiap turn dan \nmengurangi damage sebanyak 1/2*damage");
+        System.out.println("PARALYZE yang akan mengurangi speed pokeman sebanyak 0.5*speed dan \nmemiliki kemungkinan 25% untuk pokeman tidak bisa bergerak ");
+        System.out.println("SLEEP yang akan membuat pokeman tidak bisa bergerak sebanyak SleepTurn");
+        System.out.println("Jika memilih POKEMAN maka akan langsung dieksekusi pertama pada turn sebelum move dieksekusi");
         System.out.println("Game akan selesai jika salah satu pemain sudah tidak memiliki pokeman");
         System.out.println("Maka pemain yang masih memiliki pokeman akan dijadikan pemenang dari pertarungan");
-        System.out.println("========================================================================================");
+        System.out.println("===========================================================================================");
     }
 
 

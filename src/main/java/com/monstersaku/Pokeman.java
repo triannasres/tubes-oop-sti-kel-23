@@ -175,6 +175,8 @@ public class Pokeman {
         System.out.println("Giliran "+ offensePlayer + " untuk memilih command. Pilih command :");
         System.out.println("1. FIGHT");
         System.out.println("2. POKEMAN");
+        System.out.println("3. VIEW MONSTERS INFO");
+        System.out.println("4. VIEW GAME INFO");
         String command = com.nextLine();
         int randParalyze = 0;
         if(offenseMonster.getAffectedBy().equals(EffectType.PARALYZE)){
@@ -211,6 +213,24 @@ public class Pokeman {
                 // Monster offenseMonsterTemp = offenseMonster;
                 // offenseMonster = defenseMonster;
                 // defenseMonster = offenseMonsterTemp;
+            }
+            else if(command.equals("3")){
+                System.out.println("Pokeman milik " + defensePlayer);
+                for(Monster monster : monstersDefense){
+                    monster.printInfoMonster();
+                    System.out.println();
+                }
+                System.out.println("Pokeman milik " + offensePlayer);
+                for(Monster monster : monstersOffense){
+                    monster.printInfoMonster();
+                    System.out.println();
+                }
+                askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+            }
+            else if(command.equals("4")){
+                System.out.println(offensePlayer + " memiliki " + offenseMonster.getName() + " sebagai activeMonster dia");
+                System.out.println(defensePlayer + " memiliki " + defenseMonster.getName() + " sebagai activeMonster dia");
+                askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
             }
         }
         catch (Exception e){
@@ -312,15 +332,10 @@ public class Pokeman {
                         ;
                     }
                     System.out.println(offenseMonster.getName() + " menggunakan move " + moveChosen.getName());
+                    // Menunjukkan HP targetMonster setelah dilakukan move terhadapnya
                     defenseMonster.printHPMonster(defenseMonster);
                     System.out.println();
-                    // if(defenseMonster.getStats().getHP() <= 0){
-                    //     System.out.println("Pokeman anda ke-knockout");
-                    //     defenseMonster.knockOut(defenseMonster);
-                    //     monstersDefense.remove(defenseMonster);
-                    //     System.out.println("Ganti Pokeman anda : ");
-                    //     printPokemanPlayerIfKnockout(defensePlayer, monstersDefense);
-                    // }
+                    
     }
 
     public MonsterState isMonsterDeadNoPrint(ArrayList<Monster> monstersDefense, Monster defenseMonster){
@@ -341,7 +356,7 @@ public class Pokeman {
 
     public MonsterState isMonsterDead(ArrayList<Monster> monstersDefense, Monster defenseMonster){
         if(defenseMonster.getStats().getHP() <= 0){
-            System.out.println("Pokeman anda ke-knockout");
+            System.out.println("Pokeman anda ke-knockout\n");
             defenseMonster.knockOut(defenseMonster);
             MonsterState monsState = defenseMonster.getMonsterState();
             monstersDefense.remove(defenseMonster);
