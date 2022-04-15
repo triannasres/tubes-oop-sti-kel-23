@@ -26,7 +26,7 @@ id;moveType;name;elementType;accuracy;priority;ammunition;target;effect;statsEff
 25;NORMAL;Rollout;ROCK;90;1;10;OWN;-;0,0,0,0,0,0
 26;NORMAL;Dire Claw;POISON;90;1;10;ENEMY;130;0,0,0,0,0,0
 27;STATUS;Charm;FAIRY;100;1;20;ENEMY;100;0,0,0,0,0,0
-28;STATUS;Clangorous Soul;Dragon;90;1;10;ENEMY;-;0,0,0,0,0,0
+28;STATUS;Clangorous Soul;DRAGON;90;1;10;ENEMY;-;0,0,0,0,0,0
 29;SPECIAL;Colliber;PSYCHIC;100;2;20;OWN;125;0,0,0,0,0,0
 30;SPECIAL;Whirlpool;WATER;90;1;10;ENEMY;110;0,0,0,0,0,0
 31;NORMAL;Gunk Shot;POISON;100;1;10;ENEMY;120;0,0,0,0,0,0
