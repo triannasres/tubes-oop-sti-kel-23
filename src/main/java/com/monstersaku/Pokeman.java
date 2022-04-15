@@ -17,8 +17,10 @@ public class Pokeman {
     public boolean gameEnd = false;
 
     public Pokeman(){
-        Monster[] monsters1Arr = getMonsterPlayer(1);
-        Monster[] monsters2Arr = getMonsterPlayer(2);
+        Monster dum = MonsterDb.monsters.get(20);
+        Monster[] monstersArr = {dum, dum, dum, dum, dum, dum};
+        Monster[] monsters1Arr = getMonsterPlayer(1, monstersArr);
+        Monster[] monsters2Arr = getMonsterPlayer(2, monsters1Arr);
         ArrayList<Monster> monsters1 = new ArrayList<Monster>();
         ArrayList<Monster> monsters2 = new ArrayList<Monster>();
         for(Monster monster : monsters1Arr){
@@ -27,8 +29,15 @@ public class Pokeman {
         for(Monster monster : monsters2Arr){
             monsters2.add(monster);
         }
-        activeMonster1 = monsters1.get(0);
-        activeMonster2 = monsters2.get(0);
+        Scanner pok = new Scanner(System.in);
+        System.out.print("Pemain 1, pilih pokeman yang dikeluarkan ke battlefield : ");
+        int pokeman1 = pok.nextInt();
+        activeMonster1 = monsters1.get(pokeman1-1);
+        System.out.println("Pemain 1 mengeluarkan pokeman : "+ activeMonster1.getName()+"\n");
+        System.out.print("Pemain 2, pilih pokeman yang dikeluarkan ke battlefield : ");
+        int pokeman2 = pok.nextInt();
+        activeMonster2 = monsters2.get(pokeman2-1);
+        System.out.println("Pemain 2 mengeluarkan pokeman : "+ activeMonster2.getName()+"\n");
         while(gameEnd != true){
             // offensePlayer = "Pemain 2";
             // defensePlayer = "Pemain 1";
@@ -140,25 +149,23 @@ public class Pokeman {
         };
     }
 
-    public Monster[] getMonsterPlayer(int pemain){
+    public Monster[] getMonsterPlayer(int pemain, Monster[] monsterArr){
         Monster[] monsters = new Monster[6]; 
         for(int i = 0; i < 6; i++){
             // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters, 2 monsters2
             int rnd = new Random().nextInt(MonsterDb.monsters.size());
-            if (checkin(monsters, MonsterDb.monsters.get(rnd))){
-                monsters[i] = MonsterDb.monsters.get(new Random().nextInt(MonsterDb.monsters.size()));
+            while (checkin(monsters, MonsterDb.monsters.get(rnd)) || checkin(monsterArr, MonsterDb.monsters.get(rnd))){
+                rnd = new Random().nextInt(MonsterDb.monsters.size());
             }
-            else{
-                monsters[i] = MonsterDb.monsters.get(rnd);
-            }
+            monsters[i] = MonsterDb.monsters.get(rnd);
         }
         System.out.println("\nPemain " + pemain + " mendapatkan pokeman :");
         for(int i = 0; i < 6; i++){
             monsters[i].printNamaMonster();
         }
         System.out.println();
-        Monster offenseMonster = monsters[0];
-        System.out.println("Pemain " + pemain + " mengeluarkan pokeman : "+ offenseMonster.getName()+"\n");
+        // Monster offenseMonster = monsters[0];
+        // System.out.println("Pemain " + pemain + " mengeluarkan pokeman : "+ offenseMonster.getName()+"\n");
         return monsters;
     }
 
@@ -169,9 +176,14 @@ public class Pokeman {
         System.out.println("1. FIGHT");
         System.out.println("2. POKEMAN");
         String command = com.nextLine();
+        int randParalyze = 0;
+        if(offenseMonster.getAffectedBy().equals(EffectType.PARALYZE)){
+            Random rand = new Random();
+            randParalyze = rand.nextInt(100);
+        }
         try{
             if(command.equals("1")){
-                if(offenseMonster.getSleepingTime() <= 0){
+                if(offenseMonster.getSleepingTime() <= 0 && randParalyze <= 75){
                     System.out.println("Move yang dimiliki "+ offenseMonster.getName());
                     offenseMonster.printMonsterNamaMoves();
                     Move moveDipilih = getMoveChosen();
@@ -181,8 +193,13 @@ public class Pokeman {
                     // moveChosen.printMove();
                     //Nanti pilih move terus damage dll gitu lah ya
                 }
-                else{
+                else if(offenseMonster.getSleepingTime() > 0){
                     System.out.println(offenseMonster.getName() + "lagi tidur nyenyak");
+                    offenseMonster.minusSleepingTime();
+                    return null;
+                }
+                else if(randParalyze > 75){
+                    System.out.println(offenseMonster.getName() + "tidak bisa gerak karena PARALYZE");
                     offenseMonster.minusSleepingTime();
                     return null;
                 }
@@ -208,12 +225,12 @@ public class Pokeman {
         MoveType moveTypeChosen = MoveDb.determineMoveType(moveChosen); 
                     if(moveTypeChosen.equals(MoveType.NORMAL)){
                         if(moveChosen instanceof NormalMove){
-                            ((NormalMove)moveChosen).NormalAttack(offenseMonster, defenseMonster);
+                            ((NormalMove)moveChosen).NormalAttack(offenseMonster, moveChosen, defenseMonster);
                         }
                     }
                     else if(moveTypeChosen.equals(MoveType.SPECIAL)){
                         if(moveChosen instanceof SpecialMove){
-                            ((SpecialMove)moveChosen).SpecialAttack(offenseMonster, defenseMonster);
+                            ((SpecialMove)moveChosen).SpecialAttack(offenseMonster, moveChosen, defenseMonster);
                         }
                     }
                     else if(moveTypeChosen.equals(MoveType.STATUS)){
@@ -358,7 +375,7 @@ public class Pokeman {
             activeMonster1 = monsters.get(pokeman-1);
         }
         else if(defensePlayer.equals("Pemain 2")){
-            activeMonster1 = monsters.get(pokeman-1);
+            activeMonster2 = monsters.get(pokeman-1);
         }
     }
 

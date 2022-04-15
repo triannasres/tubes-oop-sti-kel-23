@@ -75,6 +75,10 @@ public class Monster {
     public Stats getStats() {
         return this.baseStats;
     }
+    
+    public Stats getStatsCur(Monster monster) {
+        return monster.baseStats;
+    }
 
     public int getSleepingTime(){
         return this.sleepingTime;
@@ -84,6 +88,9 @@ public class Monster {
     //get list of element type of monster
     public List<ElementType> getElementTypes() {
         return this.elementTypes;
+    }
+    public ElementType getElementType() {
+        return this.elementTypes.get(0);
     }
     //add element type of monster
     public void addElementType(ElementType type) {

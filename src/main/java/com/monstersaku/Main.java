@@ -31,8 +31,8 @@ public class Main {
         MonsterDb.setReader(reader.get(2));
         
         MoveDb listMoves = new MoveDb();
-        ElementDb listElements = new ElementDb();
-        MonsterDb listMonsters = new MonsterDb(listMoves);
+        new ElementDb();
+        new MonsterDb(listMoves);
         boolean menu = true;
         Scanner sc = new Scanner(System.in);
         System.out.println("=================================================");
@@ -51,9 +51,7 @@ public class Main {
 
         if(command == 1){
             //masukkin fungsi buat start game
-            Pokeman gameSession = new Pokeman();
-            menu = false;
-            command = 3;
+            new Pokeman();
         }
 
         else if(command == 2){
