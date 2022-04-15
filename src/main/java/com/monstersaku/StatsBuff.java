@@ -1,9 +1,9 @@
 package com.monstersaku;
 
 public interface StatsBuff {
-    public void atkBuff(double attack, int attackBuff);
-    public void defBuff(double defense, int defenseBuff);
-    public void spAtkBuff(double specialAttack, int specialAttackBuff);
-    public void spDefBuff(double specialDefense, int specialDefenseBuff);
-    public void speedBuff(double speed, int speedBuff);
+    public void atkBuff(Monster monster, int attackBuff);
+    public void defBuff(Monster monster, int defenseBuff);
+    public void spAtkBuff(Monster monster, int specialAttackBuff);
+    public void spDefBuff(Monster monster, int specialDefenseBuff);
+    public void speedBuff(Monster monster, int speedBuff);
 }

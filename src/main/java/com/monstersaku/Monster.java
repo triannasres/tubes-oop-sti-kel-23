@@ -15,6 +15,7 @@ public class Monster {
     private EffectType condition = EffectType.NONE;
     private MonsterState state = MonsterState.ALIVE;
     private int sleepingTime = 0;
+    private double maxHP;
 
     //constructor
     public Monster(int id, String nama, Stats baseStats, List<ElementType> elementTypes, List<Move> moves) {
@@ -23,6 +24,7 @@ public class Monster {
         this.baseStats = baseStats;
         this.elementTypes = elementTypes;
         this.moves = moves;
+        this.maxHP = baseStats.getHP();
     }   
 
     //Setter
@@ -30,6 +32,9 @@ public class Monster {
         this.id = id;
     }
     
+    public double getMaxHP(){
+        return this.maxHP;
+    }
     //get name of monster
     public void setName(String nama) {
         this.nama = nama;
@@ -69,6 +74,10 @@ public class Monster {
     //get stats of monster
     public Stats getStats() {
         return this.baseStats;
+    }
+
+    public int getSleepingTime(){
+        return this.sleepingTime;
     }
 
     /**Element Types of Monster**/
@@ -147,11 +156,15 @@ public class Monster {
         System.out.println("Monster " + this.getName());
         this.getElementTypes();
         this.getStats().printStats();
-        this.printMonsterMoves();
+        this.printMonsterNamaMoves();
     }
 
-    
-
+    public void BurnEffect(Monster target){
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.125));
+    }
+    public void PoisonEffect(Monster target){
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.0625));
+    }
     
 }
 

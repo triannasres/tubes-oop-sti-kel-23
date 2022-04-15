@@ -24,13 +24,13 @@ public class StatsMove extends Move{
     public void PoisonEffect(Monster target){
         target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.0625));
     }
-    public int SleepEffect(){
-        int sleepTurn = (int)(Math.random()*6)+1; 
-        return sleepTurn;
-    }
     public void ParalyzeEffect(Monster target){
         target.getStats().setSpd(target.getStats().getSpd()-(target.getStats().getSpd()*0.5));
         // belum chance kena sleep
+    }
+    public int SleepEffect(){
+        int sleepTurn = (int)(Math.random()*6)+1; 
+        return sleepTurn;
     }
     public void StatsEffect(Monster target){
         target.setAffectedBy(effectType);

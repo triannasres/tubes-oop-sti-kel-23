@@ -47,18 +47,19 @@ public class MoveDb {
                         move = new StatsMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, statusCondition, stats);
                     }
                     else{
-                    int basePower = Integer.parseInt(line[8]);
-                    move = new NormalMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, basePower);
+                        int basePower = Integer.parseInt(line[8]);
+                        move = new NormalMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, basePower);
                     }
                 } else if (moveType == MoveType.DEFAULT) {
-                    move = new DefaultMove(elementType);
+                        move = new DefaultMove(elementType);
                 } else if (moveType == MoveType.SPECIAL) {
-                    int basePower = Integer.parseInt(line[8]);
-                    move = new SpecialMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, basePower);
+                        int basePower = Integer.parseInt(line[8]);
+                        move = new SpecialMove(id, moveType, name, elementType, accuracy, priority, ammunition, target, basePower);
                 } else {
                     EffectType statusCondition;
                     if(line[8].equals("-")) {
                         statusCondition = EffectType.NONE;
+                        stats.setStatsBuff((int)stats.getHP(), (int)stats.getAtk(), (int)stats.getDef(), (int)stats.getSpAtk(), (int)stats.getSpDef(), (int)stats.getSpd());
                     } else {
                         statusCondition = EffectType.valueOf(line[8]);
                     }

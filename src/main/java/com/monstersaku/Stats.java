@@ -9,6 +9,7 @@ public class Stats implements StatsBuff{
     private double specialDefense;
     private double speed;
 
+    private int HPBuff;
     private int attackBuff;
     private int defenseBuff;
     private int specialAttackBuff;
@@ -22,6 +23,7 @@ public class Stats implements StatsBuff{
         this.specialAttack = spAtk;
         this.specialDefense = spDef;
         this.speed = spe;
+        this.HPBuff = 0;
         this.attackBuff = 0;
         this.defenseBuff = 0;
         this.specialAttackBuff = 0;
@@ -72,160 +74,192 @@ public class Stats implements StatsBuff{
     public double getSpd(){
         return this.speed;
     }
+    public int getHPBuff(){
+        return this.HPBuff;
+    }
+    public int getAtkBuff(){
+        return this.attackBuff;
+    }
+    public int getDefBuff(){
+        return this.defenseBuff;
+    }
+    public int getSpAtkBuff(){
+        return this.specialAttackBuff;
+    }
+    public int getSpDefBuff(){
+        return this.specialDefenseBuff;
+    }
+    public int getSpdBuff(){
+        return this.speedBuff;
+    }
+
+    public void heal(Monster monster, double healthPoint){
+        this.healthPoint += healthPoint;
+    }
     
-    public void setStatsBuff(int attackBuff, int defenseBuff, int spAtkBuff, int spDefBuff, int speedBuff){
-        this.attackBuff = attackBuff;
-        this.defenseBuff = defenseBuff;
-        this.specialAttackBuff = spAtkBuff;
-        this.specialDefenseBuff = spDefBuff;
-        this.speedBuff = speedBuff;
+    public void setStatsBuff(int HPBuff, int attackBuff, int defenseBuff, int spAtkBuff, int spDefBuff, int speedBuff){
+        this.HPBuff = HPBuff;
+        this.attackBuff += attackBuff;
+        this.defenseBuff += defenseBuff;
+        this.specialAttackBuff += spAtkBuff;
+        this.specialDefenseBuff += spDefBuff;
+        this.speedBuff += speedBuff;
+    }
+
+    public void doStatsBuff(Monster monster){
+        heal(monster, HPBuff);
+        atkBuff(monster, attackBuff);
+        defBuff(monster, defenseBuff);
+        spAtkBuff(monster, specialAttackBuff);
+        spDefBuff(monster, specialDefenseBuff);
+        speedBuff(monster, speedBuff);
     }
 
     //ntar input base statsnya biar abis dibuff/debuff hasilnya tetap
     //nanti kalo udah pelajarin csv reader gua masukin stats 
-    public void atkBuff(double attack, int attackBuff){ 
+    public void atkBuff(Monster monster, int attackBuff){ 
         if(attackBuff == -4){
-            this.attack = attack * 2/6;
+            setAtk(monster.getStats().getAtk()*2/6);
         }
         else if (attackBuff == -3){
-            this.attack = attack * 2/5;
+            setAtk(monster.getStats().getAtk()*2/5);
         }
         else if (attackBuff == -2){
-            this.attack = attack * 2/4;
+            setAtk(monster.getStats().getAtk()*2/4);
         }
         else if (attackBuff == -1){
-            this.attack = attack * 2/3;
+            setAtk(monster.getStats().getAtk()*2/3);
         }
         else if (attackBuff == 0){;
-            this.attack = attack * 1;
+            setAtk(monster.getStats().getAtk()*1);
         }
         else if (attackBuff == 1){
-            this.attack = attack * 3/2;
+            setAtk(monster.getStats().getAtk()*3/2);
         }
         else if (attackBuff == 2){
-            this.attack = attack * 4/2;
+            setAtk(monster.getStats().getAtk()*4/2);
         }
         else if (attackBuff == 3){
-            this.attack = attack * 5/2;
+            setAtk(monster.getStats().getAtk()*5/2);
         }
         else if (attackBuff == 4){
-            this.attack = attack * 6/2;
+            setAtk(monster.getStats().getAtk()*6/2);
         }
     }
-    public void defBuff(double defense, int defenseBuff){ 
+    public void defBuff(Monster monster, int defenseBuff){ 
         if(defenseBuff == -4){
-            this.defense = defense * 2/6;
+            setDef(monster.getStats().getDef()*2/6);
         }
         else if (defenseBuff == -3){
-            this.defense = defense * 2/5;
+            setDef(monster.getStats().getDef()*2/5);
         }
         else if (defenseBuff == -2){
-            this.defense = defense * 2/4;
+            setDef(monster.getStats().getDef()*2/4);
         }
         else if (defenseBuff == -1){
-            this.defense = defense * 2/3;
+            setDef(monster.getStats().getDef()*2/3);
         }
         else if (defenseBuff == 0){;
-            this.defense = defense * 1;
+            setDef(monster.getStats().getDef()*2/2);
         }
         else if (defenseBuff == 1){
-            this.defense = defense * 3/2;
+            setDef(monster.getStats().getDef()*3/2);
         }
         else if (defenseBuff == 2){
-            this.defense = defense * 4/2;
+            setDef(monster.getStats().getDef()*4/2);
         }
         else if (defenseBuff == 3){
-            this.defense = defense * 5/2;
+            setDef(monster.getStats().getDef()*5/2);
         }
         else if (defenseBuff == 4){
-            this.defense = defense * 6/2;
+            setDef(monster.getStats().getDef()*6/2);
         }
     }
-    public void spAtkBuff(double specialAttack, int specialAttackBuff){ 
+    public void spAtkBuff(Monster monster, int specialAttackBuff){ 
         if(specialAttackBuff == -4){
-            this.specialAttack = specialAttack * 2/6;
+            setSpAtk(monster.getStats().getSpAtk()*2/6);
         }
         else if (specialAttackBuff == -3){
-            this.specialAttack = specialAttack * 2/5;
+            setSpAtk(monster.getStats().getSpAtk()*2/5);
         }
         else if (specialAttackBuff == -2){
-            this.specialAttack = specialAttack * 2/4;
+            setSpAtk(monster.getStats().getSpAtk()*2/4);
         }
         else if (specialAttackBuff == -1){
-            this.specialAttack = specialAttack * 2/3;
+            setSpAtk(monster.getStats().getSpAtk()*2/3);
         }
         else if (specialAttackBuff == 0){;
-            this.specialAttack = specialAttack * 1;
+            setSpAtk(monster.getStats().getSpAtk()*2/2);
         }
         else if (specialAttackBuff == 1){
-            this.specialAttack = specialAttack * 3/2;
+            setSpAtk(monster.getStats().getSpAtk()*3/2);
         }
         else if (specialAttackBuff == 2){
-            this.specialAttack = specialAttack * 4/2;
+            setSpAtk(monster.getStats().getSpAtk()*4/2);
         }
         else if (specialAttackBuff == 3){
-            this.specialAttack = specialAttack * 5/2;
+            setSpAtk(monster.getStats().getSpAtk()*5/2);
         }
         else if (specialAttackBuff == 4){
-            this.specialAttack = specialAttack * 6/2;
+            setSpAtk(monster.getStats().getSpAtk()*6/2);
         }
     }
-    public void spDefBuff(double specialDefense, int specialDefenseBuff){ 
+    public void spDefBuff(Monster monster, int specialDefenseBuff){ 
         if(specialDefenseBuff == -4){
-            this.specialDefense = specialDefense * 2/6;
+            setSpDef(monster.getStats().getSpd()*2/6);
         }
         else if (specialDefenseBuff == -3){
-            this.specialDefense = specialDefense * 2/5;
+            setSpDef(monster.getStats().getSpd()*2/5);
         }
         else if (specialDefenseBuff == -2){
-            this.specialDefense = specialDefense * 2/4;
+            setSpDef(monster.getStats().getSpd()*2/4);
         }
         else if (specialDefenseBuff == -1){
-            this.specialDefense = specialDefense * 2/3;
+            setSpDef(monster.getStats().getSpd()*2/3);
         }
         else if (specialDefenseBuff == 0){;
-            this.specialDefense = specialDefense * 1;
+            setSpDef(monster.getStats().getSpd()*2/2);
         }
         else if (specialDefenseBuff == 1){
-            this.specialDefense = specialDefense * 3/2;
+            setSpDef(monster.getStats().getSpd()*3/2);
         }
         else if (specialDefenseBuff == 2){
-            this.specialDefense = specialDefense * 4/2;
+            setSpDef(monster.getStats().getSpd()*4/2);
         }
         else if (specialDefenseBuff == 3){
-            this.specialDefense = specialDefense * 5/2;
+            setSpDef(monster.getStats().getSpd()*5/2);
         }
         else if (specialDefenseBuff == 4){
-            this.specialDefense = specialDefense * 6/2;
+            setSpDef(monster.getStats().getSpd()*6/2);
         }
     }
-    public void speedBuff(double speed, int speedBuff){ 
+    public void speedBuff(Monster monster, int speedBuff){ 
         if(speedBuff == -4){
-            this.speed = speed * 2/6;
+           setSpd(monster.getStats().getSpd()*2/6);
         }
         else if (speedBuff == -3){
-            this.speed = speed * 2/5;
+            setSpd(monster.getStats().getSpd()*2/5);
         }
         else if (speedBuff == -2){
-            this.speed = speed * 2/4;
+            setSpd(monster.getStats().getSpd()*2/4);
         }
         else if (speedBuff == -1){
-            this.speed = speed * 2/3;
+            setSpd(monster.getStats().getSpd()*2/3);
         }
         else if (speedBuff == 0){;
-            this.speed = speed * 1;
+            setSpd(monster.getStats().getSpd()*2/2);
         }
         else if (speedBuff == 1){
-            this.speed = speed * 3/2;
+            setSpd(monster.getStats().getSpd()*3/2);
         }
         else if (speedBuff == 2){
-            this.speed = speed * 4/2;
+            setSpd(monster.getStats().getSpd()*4/2);
         }
         else if (speedBuff == 3){
-            this.speed = speed * 5/2;
+            setSpd(monster.getStats().getSpd()*5/2);
         }
         else if (speedBuff == 4){
-            this.speed = speed * 6/2;
+            setSpd(monster.getStats().getSpd()*6/2);
         }
     }
 
@@ -241,5 +275,15 @@ public class Stats implements StatsBuff{
         System.out.println("Special Attack : " + this.specialAttack);
         System.out.println("Special Defense : " + this.specialDefense);
         System.out.println("Speed : " + this.speed);
+    }
+    public void BurnEffect(Monster target){
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.125));
+    }
+    public void PoisonEffect(Monster target){
+        target.getStats().setHP(target.getStats().getHP()-Math.floor(target.getStats().getHP()*0.0625));
+    }
+    public void ParalyzeEffect(Monster target){
+        target.getStats().setSpd(target.getStats().getSpd()-(target.getStats().getSpd()*0.5));
+        // belum chance kena sleep
     }
 }
