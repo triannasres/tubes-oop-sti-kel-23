@@ -161,9 +161,15 @@ public class Monster {
 
     public void printInfoMonster() {
         System.out.println("Monster " + this.getName());
-        this.getElementTypes();
+        System.out.println(this.getElementTypes());
         this.getStats().printStats();
         this.printMonsterNamaMoves();
+    }
+    
+    public void printInfoMonsterNoMoves() {
+        System.out.println("Monster " + this.getName());
+        System.out.println(this.getElementTypes());
+        this.getStats().printStats();
     }
 
     public void BurnEffect(Monster target){

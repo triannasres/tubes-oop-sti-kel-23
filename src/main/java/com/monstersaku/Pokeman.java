@@ -137,15 +137,23 @@ public class Pokeman {
     public void afterDamageCalc(){
         if(activeMonster1.getAffectedBy().equals(EffectType.BURN)){
             activeMonster1.BurnEffect(activeMonster1);
+            System.out.println("After Burn Effect :");
+            activeMonster1.printHPMonster(activeMonster1);
         };
         if(activeMonster2.getAffectedBy().equals(EffectType.BURN)){
             activeMonster2.BurnEffect(activeMonster1);
+            System.out.println("After Burn Effect :");
+            activeMonster2.printHPMonster(activeMonster2);
         };
         if(activeMonster1.getAffectedBy().equals(EffectType.POISON)){
             activeMonster1.PoisonEffect(activeMonster1);
+            System.out.println("After Poison Effect :");
+            activeMonster1.printHPMonster(activeMonster1);
         };
         if(activeMonster2.getAffectedBy().equals(EffectType.POISON)){
+            System.out.println("After Poison Effect :");
             activeMonster2.PoisonEffect(activeMonster1);
+            activeMonster2.printHPMonster(activeMonster2);
         };
     }
 
@@ -154,7 +162,7 @@ public class Pokeman {
         for(int i = 0; i < 6; i++){
             // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters, 2 monsters2
             int rnd = new Random().nextInt(MonsterDb.monsters.size());
-            while (checkin(monsters, MonsterDb.monsters.get(rnd)) || checkin(monsterArr, MonsterDb.monsters.get(rnd))){
+            while (checkin(monsters, MonsterDb.monsters.get(rnd)) || checkin(monsterArr, MonsterDb.monsters.get(rnd)) || rnd == 20){
                 rnd = new Random().nextInt(MonsterDb.monsters.size());
             }
             monsters[i] = MonsterDb.monsters.get(rnd);
@@ -225,12 +233,21 @@ public class Pokeman {
                     monster.printInfoMonster();
                     System.out.println();
                 }
-                askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+                Move moveChosen = askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+                return moveChosen;
             }
             else if(command.equals("4")){
                 System.out.println(offensePlayer + " memiliki " + offenseMonster.getName() + " sebagai activeMonster dia");
+                offenseMonster.printInfoMonsterNoMoves();
                 System.out.println(defensePlayer + " memiliki " + defenseMonster.getName() + " sebagai activeMonster dia");
-                askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+                defenseMonster.printInfoMonsterNoMoves();
+                Move moveChosen = askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+                return moveChosen;
+            }
+            else{
+                System.out.println("Masukkan salah, masukkan command lagi");
+                Move moveChosen = askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
+                return moveChosen;
             }
         }
         catch (Exception e){
@@ -242,18 +259,24 @@ public class Pokeman {
 
     public void doMove(ArrayList<Monster> monstersOffense, ArrayList<Monster> monstersDefense, Monster offenseMonster, Monster defenseMonster, Move moveChosen){
         
-        MoveType moveTypeChosen = MoveDb.determineMoveType(moveChosen); 
-                    if(moveTypeChosen.equals(MoveType.NORMAL)){
+        MoveType moveTypeChosen = MoveDb.determineMoveType(moveChosen);
+        int rand = new Random().nextInt(100);
+                    if(moveChosen.getAccuracy() < rand){
+                        System.out.println("Move miss lol");
+                        System.out.println();
+                        return;
+                    }
+                    else if(moveTypeChosen.equals(MoveType.NORMAL) && moveChosen.getAccuracy() >= rand){
                         if(moveChosen instanceof NormalMove){
                             ((NormalMove)moveChosen).NormalAttack(offenseMonster, moveChosen, defenseMonster);
                         }
                     }
-                    else if(moveTypeChosen.equals(MoveType.SPECIAL)){
+                    else if(moveTypeChosen.equals(MoveType.SPECIAL) && moveChosen.getAccuracy() >= rand){
                         if(moveChosen instanceof SpecialMove){
                             ((SpecialMove)moveChosen).SpecialAttack(offenseMonster, moveChosen, defenseMonster);
                         }
                     }
-                    else if(moveTypeChosen.equals(MoveType.STATUS)){
+                    else if(moveTypeChosen.equals(MoveType.STATUS) && moveChosen.getAccuracy() >= rand){
                         if(moveChosen instanceof StatsMove){
                             StatsMove statsMoveChosen = ((StatsMove)moveChosen);
                             if(statsMoveChosen.getEffectype().equals(EffectType.valueOf("PARALYZE"))){
@@ -334,8 +357,7 @@ public class Pokeman {
                     System.out.println(offenseMonster.getName() + " menggunakan move " + moveChosen.getName());
                     // Menunjukkan HP targetMonster setelah dilakukan move terhadapnya
                     defenseMonster.printHPMonster(defenseMonster);
-                    System.out.println();
-                    
+                    System.out.println();             
     }
 
     public MonsterState isMonsterDeadNoPrint(ArrayList<Monster> monstersDefense, Monster defenseMonster){
@@ -380,6 +402,7 @@ public class Pokeman {
         else if(offensePlayer.equals("Pemain 2")){
             activeMonster2 = monsters.get(pokeman-1);
         }
+        // swPFC.close();
     }
 
     private void switchPokemanIfKnockout(ArrayList<Monster> monsters) {
@@ -392,6 +415,7 @@ public class Pokeman {
         else if(defensePlayer.equals("Pemain 2")){
             activeMonster2 = monsters.get(pokeman-1);
         }
+        // swPIF.close();
     }
 
     public void printPokemanPlayerIfKnockout(String defensePlayer, ArrayList<Monster> monsters){
