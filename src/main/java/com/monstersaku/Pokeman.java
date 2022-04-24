@@ -18,8 +18,7 @@ public class Pokeman {
 
     public Pokeman(){
         Monster dum = MonsterDb.monsters.get(20);
-        Monster[] monstersArr = {dum, dum, dum, dum, dum, dum};
-        Monster[] monsters1Arr = getMonsterPlayer(1, monstersArr);
+        Monster[] monsters1Arr = getMonsterPlayer(1);
         Monster[] monsters2Arr = getMonsterPlayer(2, monsters1Arr);
         ArrayList<Monster> monsters1 = new ArrayList<Monster>();
         ArrayList<Monster> monsters2 = new ArrayList<Monster>();
@@ -157,6 +156,26 @@ public class Pokeman {
         };
     }
 
+    public Monster[] getMonsterPlayer(int pemain){
+        Monster[] monsters = new Monster[6]; 
+        for(int i = 0; i < 6; i++){
+            // Asumsi nanti array isi monsters namanya monsters terus array isi 6 monsters punya pemain 1 monsters, 2 monsters2
+            int rnd = new Random().nextInt(MonsterDb.monsters.size());
+            while (checkin(monsters, MonsterDb.monsters.get(rnd)) || rnd == 20){
+                rnd = new Random().nextInt(MonsterDb.monsters.size());
+            }
+            monsters[i] = MonsterDb.monsters.get(rnd);
+        }
+        System.out.println("\nPemain " + pemain + " mendapatkan pokeman :");
+        for(int i = 0; i < 6; i++){
+            monsters[i].printNamaMonster();
+        }
+        System.out.println();
+        // Monster offenseMonster = monsters[0];
+        // System.out.println("Pemain " + pemain + " mengeluarkan pokeman : "+ offenseMonster.getName()+"\n");
+        return monsters;
+    }
+
     public Monster[] getMonsterPlayer(int pemain, Monster[] monsterArr){
         Monster[] monsters = new Monster[6]; 
         for(int i = 0; i < 6; i++){
@@ -239,6 +258,7 @@ public class Pokeman {
             else if(command.equals("4")){
                 System.out.println(offensePlayer + " memiliki " + offenseMonster.getName() + " sebagai activeMonster dia");
                 offenseMonster.printInfoMonsterNoMoves();
+                System.out.println();
                 System.out.println(defensePlayer + " memiliki " + defenseMonster.getName() + " sebagai activeMonster dia");
                 defenseMonster.printInfoMonsterNoMoves();
                 Move moveChosen = askCommand(monstersOffense, monstersDefense, offenseMonster, defenseMonster);
